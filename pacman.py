@@ -16,23 +16,23 @@ WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 FPS = 60
 
-# Colors - All grayscale
+# Colors
 BLACK = (0, 0, 0)  # Background
-PACMAN_YELLOW = (0, 100, 255)  # Blue for Pac-Man
-MEDIUM_GRAY = (128, 128, 128)  # Medium gray for walls
+PACMAN_YELLOW = (255, 255, 0)  # Yellow for Pac-Man
+WALL_BLUE = (33, 33, 222)  # Blue for walls
 WHITE = (255, 255, 255)  # White for dots and text
-DARK_GRAY_1 = (80, 80, 80)  # Dark gray for ghost 1
-DARK_GRAY_2 = (100, 100, 100)  # Darker gray for ghost 2
-MEDIUM_DARK_GRAY = (120, 120, 120)  # Medium-dark gray for ghost 3
-GRAY = (140, 140, 140)  # Gray for ghost 4
-VERY_LIGHT_GRAY = (180, 180, 180)  # Very light gray for vulnerable ghosts
-LIGHT_MEDIUM_GRAY = (160, 160, 160)  # Light-medium gray for flashing vulnerable ghosts
-POWER_PELLET_GRAY = (220, 220, 220)  # Very light gray for power pellets
-TIMER_LIGHT_GRAY = (210, 210, 210)  # Light gray for timer (high)
-TIMER_MEDIUM_GRAY = (170, 170, 170)  # Medium gray for timer (medium)
-TIMER_DARK_GRAY = (130, 130, 130)  # Dark gray for timer (low)
-GAME_OVER_GRAY = (150, 150, 150)  # Medium gray for game over text
-WIN_GRAY = (190, 190, 190)  # Light gray for win text
+GHOST_RED = (255, 0, 0)  # Red for ghost 1 (Blinky)
+GHOST_CYAN = (0, 255, 255)  # Cyan for ghost 2 (Inky)
+GHOST_PINK = (255, 184, 255)  # Pink for ghost 3 (Pinky)
+GHOST_ORANGE = (255, 184, 82)  # Orange for ghost 4 (Clyde)
+VULNERABLE_BLUE = (33, 33, 255)  # Blue for vulnerable ghosts
+VULNERABLE_WHITE = (255, 255, 255)  # White for flashing vulnerable ghosts
+POWER_PELLET_COLOR = (255, 255, 150)  # Light yellow for power pellets
+TIMER_GREEN = (0, 255, 0)  # Green for timer (high)
+TIMER_YELLOW = (255, 255, 0)  # Yellow for timer (medium)
+TIMER_RED = (255, 0, 0)  # Red for timer (low)
+GAME_OVER_RED = (255, 0, 0)  # Red for game over text
+WIN_GREEN = (0, 255, 0)  # Green for win text
 
 # Game settings
 PACMAN_SIZE = 20
@@ -133,11 +133,11 @@ class Ghost:
         if power_pellet_active and not self.eaten:
             self.vulnerable = True
             self.vulnerable_timer = power_pellet_timer
-            # Make ghost lighter gray when vulnerable, flashing when timer is low
+            # Make ghost blue when vulnerable, flashing white when timer is low
             if power_pellet_timer < 60 and (power_pellet_timer // 10) % 2:  # Flash in last second
-                self.color = LIGHT_MEDIUM_GRAY
+                self.color = VULNERABLE_WHITE
             else:
-                self.color = VERY_LIGHT_GRAY
+                self.color = VULNERABLE_BLUE
         else:
             self.vulnerable = False
             self.color = self.original_color
@@ -251,10 +251,10 @@ class Game:
         # Initialize game objects
         self.pacman = Pacman(40, 40)
         self.ghosts = [
-            Ghost(360, 240, DARK_GRAY_1),
-            Ghost(400, 240, DARK_GRAY_2),
-            Ghost(440, 240, MEDIUM_DARK_GRAY),
-            Ghost(480, 240, GRAY)
+            Ghost(360, 240, GHOST_RED),
+            Ghost(400, 240, GHOST_CYAN),
+            Ghost(440, 240, GHOST_PINK),
+            Ghost(480, 240, GHOST_ORANGE)
         ]
         
         # Count total dots (including power pellets)
@@ -349,16 +349,16 @@ class Game:
                 pixel_y = y * WALL_SIZE
                 
                 if cell == 1:  # Wall
-                    pygame.draw.rect(self.screen, MEDIUM_GRAY,
+                    pygame.draw.rect(self.screen, WALL_BLUE,
                                    (pixel_x, pixel_y, WALL_SIZE, WALL_SIZE))
                 elif cell == 2:  # Dot
-                    pygame.draw.circle(self.screen, WHITE, 
+                    pygame.draw.circle(self.screen, WHITE,
                                      (pixel_x + WALL_SIZE//2, pixel_y + WALL_SIZE//2), DOT_SIZE)
                 elif cell == 3:  # Power pellet
                     # Animate power pellet with pulsing effect
                     pulse = abs(pygame.time.get_ticks() // 200 % 2)
                     size = POWER_PELLET_SIZE + pulse * 2
-                    pygame.draw.circle(self.screen, POWER_PELLET_GRAY,
+                    pygame.draw.circle(self.screen, POWER_PELLET_COLOR,
                                      (pixel_x + WALL_SIZE//2, pixel_y + WALL_SIZE//2), size)
         
         # Draw game objects
@@ -376,7 +376,7 @@ class Game:
         # Draw power pellet timer
         if self.power_pellet_timer > 0:
             timer_seconds = self.power_pellet_timer // 60 + 1
-            power_text = self.font.render(f"POWER TIME: {timer_seconds}", True, TIMER_LIGHT_GRAY)
+            power_text = self.font.render(f"POWER TIME: {timer_seconds}", True, TIMER_GREEN)
             self.screen.blit(power_text, (10, 90))
 
             # Draw power pellet indicator bar
@@ -392,13 +392,13 @@ class Game:
             progress = self.power_pellet_timer / POWER_PELLET_DURATION
             progress_width = int(bar_width * progress)
 
-            # Color changes as time runs out (different shades of gray)
+            # Color changes as time runs out (green -> yellow -> red)
             if progress > 0.5:
-                bar_color = TIMER_LIGHT_GRAY
+                bar_color = TIMER_GREEN
             elif progress > 0.2:
-                bar_color = TIMER_MEDIUM_GRAY
+                bar_color = TIMER_YELLOW
             else:
-                bar_color = TIMER_DARK_GRAY
+                bar_color = TIMER_RED
 
             pygame.draw.rect(self.screen, bar_color, (bar_x, bar_y, progress_width, bar_height))
         
@@ -412,7 +412,7 @@ class Game:
     def game_over(self):
         # Show game over screen
         self.screen.fill(BLACK)
-        game_over_text = self.font.render("GAME OVER!", True, GAME_OVER_GRAY)
+        game_over_text = self.font.render("GAME OVER!", True, GAME_OVER_RED)
         final_score_text = self.font.render(f"Final Score: {self.score}", True, WHITE)
         restart_text = self.font.render("Press any key to quit", True, WHITE)
         
@@ -437,7 +437,7 @@ class Game:
     def win_game(self):
         # Show win screen
         self.screen.fill(BLACK)
-        win_text = self.font.render("YOU WIN!", True, WIN_GRAY)
+        win_text = self.font.render("YOU WIN!", True, WIN_GREEN)
         final_score_text = self.font.render(f"Final Score: {self.score}", True, WHITE)
         restart_text = self.font.render("Press any key to quit", True, WHITE)
         
