@@ -18,7 +18,7 @@ FPS = 60
 
 # Colors - All grayscale
 BLACK = (0, 0, 0)  # Background
-PACMAN_YELLOW = (255, 165, 0)  # Orange for Pac-Man
+PACMAN_YELLOW = (0, 100, 255)  # Blue for Pac-Man
 MEDIUM_GRAY = (128, 128, 128)  # Medium gray for walls
 WHITE = (255, 255, 255)  # White for dots and text
 DARK_GRAY_1 = (80, 80, 80)  # Dark gray for ghost 1
