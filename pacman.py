@@ -148,9 +148,9 @@ class Ghost:
             if self.respawn_timer <= 0:
                 self.eaten = False
                 self.vulnerable = False
-                # Return to ghost house area
-                self.x = 360 + random.randint(0, 3) * 40
-                self.y = 240
+                # Return to ghost house area (randomized position)
+                self.x = 300 + random.randint(0, 9) * 20
+                self.y = 220 + random.randint(0, 4) * 20
                 self.color = self.original_color
             return  # Don't move while respawning
             
@@ -250,12 +250,25 @@ class Game:
         
         # Initialize game objects
         self.pacman = Pacman(40, 40)
-        self.ghosts = [
-            Ghost(360, 240, GHOST_RED),
-            Ghost(400, 240, GHOST_CYAN),
-            Ghost(440, 240, GHOST_PINK),
-            Ghost(480, 240, GHOST_ORANGE)
-        ]
+
+        # Create 50 ghosts with varied colors and spawn positions
+        ghost_colors = [GHOST_RED, GHOST_CYAN, GHOST_PINK, GHOST_ORANGE]
+        self.ghosts = []
+
+        # Ghost house center area (around 360-480, 220-280)
+        ghost_house_x_start = 300
+        ghost_house_y_start = 220
+        ghosts_per_row = 10
+        spacing_x = 20
+        spacing_y = 20
+
+        for i in range(50):
+            color = ghost_colors[i % len(ghost_colors)]
+            row = i // ghosts_per_row
+            col = i % ghosts_per_row
+            x = ghost_house_x_start + col * spacing_x
+            y = ghost_house_y_start + row * spacing_y
+            self.ghosts.append(Ghost(x, y, color))
         
         # Count total dots (including power pellets)
         self.total_dots = sum(row.count(2) + row.count(3) for row in self.maze)
@@ -325,9 +338,17 @@ class Game:
                     else:
                         # Reset positions
                         self.pacman.x, self.pacman.y = 40, 40
+                        # Reset ghosts to their spawn grid
+                        ghost_house_x_start = 300
+                        ghost_house_y_start = 220
+                        ghosts_per_row = 10
+                        spacing_x = 20
+                        spacing_y = 20
                         for i, g in enumerate(self.ghosts):
-                            g.x = 360 + i * 40
-                            g.y = 240
+                            row = i // ghosts_per_row
+                            col = i % ghosts_per_row
+                            g.x = ghost_house_x_start + col * spacing_x
+                            g.y = ghost_house_y_start + row * spacing_y
                             g.eaten = False
                             g.vulnerable = False
                             g.respawn_timer = 0
