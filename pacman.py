@@ -16,23 +16,23 @@ WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 FPS = 60
 
-# Colors - Classic Pac-Man theme
+# Colors - Grayscale theme
 BLACK = (0, 0, 0)  # Background
-PACMAN_YELLOW = (255, 255, 0)  # Bright yellow for Pac-Man
-WALL_BLUE = (33, 33, 255)  # Blue for walls
+PACMAN_YELLOW = (200, 200, 200)  # Light gray for Pac-Man
+WALL_BLUE = (80, 80, 80)  # Dark gray for walls
 WHITE = (255, 255, 255)  # White for dots and text
-GHOST_RED = (255, 0, 0)  # Red for ghost 1 (Blinky)
-GHOST_CYAN = (0, 255, 255)  # Cyan for ghost 2 (Inky)
-GHOST_PINK = (255, 184, 255)  # Pink for ghost 3 (Pinky)
-GHOST_ORANGE = (255, 184, 82)  # Orange for ghost 4 (Clyde)
-VULNERABLE_BLUE = (33, 33, 255)  # Blue for vulnerable ghosts
-VULNERABLE_WHITE = (255, 255, 255)  # White for flashing vulnerable ghosts
-POWER_PELLET_COLOR = (255, 255, 200)  # Light yellow for power pellets
-TIMER_GREEN = (0, 255, 0)  # Green for timer (high)
-TIMER_YELLOW = (255, 255, 0)  # Yellow for timer (medium)
-TIMER_RED = (255, 0, 0)  # Red for timer (low)
-GAME_OVER_RED = (255, 0, 0)  # Red for game over text
-WIN_GREEN = (0, 255, 0)  # Green for win text
+GHOST_RED = (150, 150, 150)  # Medium-light gray for ghost 1 (Blinky)
+GHOST_CYAN = (120, 120, 120)  # Medium gray for ghost 2 (Inky)
+GHOST_PINK = (180, 180, 180)  # Light-medium gray for ghost 3 (Pinky)
+GHOST_ORANGE = (160, 160, 160)  # Medium-light gray for ghost 4 (Clyde)
+VULNERABLE_BLUE = (100, 100, 100)  # Medium-dark gray for vulnerable ghosts
+VULNERABLE_WHITE = (220, 220, 220)  # Light gray for flashing vulnerable ghosts
+POWER_PELLET_COLOR = (240, 240, 240)  # Very light gray for power pellets
+TIMER_GREEN = (180, 180, 180)  # Light-medium gray for timer (high)
+TIMER_YELLOW = (150, 150, 150)  # Medium gray for timer (medium)
+TIMER_RED = (100, 100, 100)  # Medium-dark gray for timer (low)
+GAME_OVER_RED = (120, 120, 120)  # Medium gray for game over text
+WIN_GREEN = (200, 200, 200)  # Light gray for win text
 
 # Game settings
 PACMAN_SIZE = 20
