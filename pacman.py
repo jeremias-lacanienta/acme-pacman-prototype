@@ -16,10 +16,10 @@ WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 FPS = 60
 
-# Colors
+# Colors - Classic Pac-Man theme
 BLACK = (0, 0, 0)  # Background
-PACMAN_YELLOW = (255, 255, 0)  # Yellow for Pac-Man
-WALL_BLUE = (33, 33, 222)  # Blue for walls
+PACMAN_YELLOW = (255, 255, 0)  # Bright yellow for Pac-Man
+WALL_BLUE = (33, 33, 255)  # Blue for walls
 WHITE = (255, 255, 255)  # White for dots and text
 GHOST_RED = (255, 0, 0)  # Red for ghost 1 (Blinky)
 GHOST_CYAN = (0, 255, 255)  # Cyan for ghost 2 (Inky)
@@ -27,7 +27,7 @@ GHOST_PINK = (255, 184, 255)  # Pink for ghost 3 (Pinky)
 GHOST_ORANGE = (255, 184, 82)  # Orange for ghost 4 (Clyde)
 VULNERABLE_BLUE = (33, 33, 255)  # Blue for vulnerable ghosts
 VULNERABLE_WHITE = (255, 255, 255)  # White for flashing vulnerable ghosts
-POWER_PELLET_COLOR = (255, 255, 150)  # Light yellow for power pellets
+POWER_PELLET_COLOR = (255, 255, 200)  # Light yellow for power pellets
 TIMER_GREEN = (0, 255, 0)  # Green for timer (high)
 TIMER_YELLOW = (255, 255, 0)  # Yellow for timer (medium)
 TIMER_RED = (255, 0, 0)  # Red for timer (low)
@@ -251,23 +251,21 @@ class Game:
         # Initialize game objects
         self.pacman = Pacman(40, 40)
 
-        # Create 50 ghosts with varied colors and spawn positions
+        # Create 4 ghosts with varied colors and spawn positions
         ghost_colors = [GHOST_RED, GHOST_CYAN, GHOST_PINK, GHOST_ORANGE]
         self.ghosts = []
 
-        # Ghost house center area (around 360-480, 220-280)
-        ghost_house_x_start = 300
-        ghost_house_y_start = 220
-        ghosts_per_row = 10
-        spacing_x = 20
-        spacing_y = 20
+        # Ghost house center area
+        ghost_positions = [
+            (360, 240),
+            (400, 240),
+            (360, 280),
+            (400, 280)
+        ]
 
-        for i in range(50):
-            color = ghost_colors[i % len(ghost_colors)]
-            row = i // ghosts_per_row
-            col = i % ghosts_per_row
-            x = ghost_house_x_start + col * spacing_x
-            y = ghost_house_y_start + row * spacing_y
+        for i in range(4):
+            color = ghost_colors[i]
+            x, y = ghost_positions[i]
             self.ghosts.append(Ghost(x, y, color))
         
         # Count total dots (including power pellets)
@@ -338,17 +336,15 @@ class Game:
                     else:
                         # Reset positions
                         self.pacman.x, self.pacman.y = 40, 40
-                        # Reset ghosts to their spawn grid
-                        ghost_house_x_start = 300
-                        ghost_house_y_start = 220
-                        ghosts_per_row = 10
-                        spacing_x = 20
-                        spacing_y = 20
+                        # Reset ghosts to their spawn positions
+                        ghost_positions = [
+                            (360, 240),
+                            (400, 240),
+                            (360, 280),
+                            (400, 280)
+                        ]
                         for i, g in enumerate(self.ghosts):
-                            row = i // ghosts_per_row
-                            col = i % ghosts_per_row
-                            g.x = ghost_house_x_start + col * spacing_x
-                            g.y = ghost_house_y_start + row * spacing_y
+                            g.x, g.y = ghost_positions[i]
                             g.eaten = False
                             g.vulnerable = False
                             g.respawn_timer = 0
