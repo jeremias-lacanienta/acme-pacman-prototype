@@ -16,29 +16,29 @@ WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 FPS = 60
 
-# Colors - Grayscale theme
+# Colors - Classic Pac-Man theme
 BLACK = (0, 0, 0)  # Background
-PACMAN_YELLOW = (200, 200, 200)  # Light gray for Pac-Man
-WALL_BLUE = (60, 60, 60)  # Dark gray for walls
+PACMAN_YELLOW = (255, 255, 0)  # Bright yellow for Pac-Man
+WALL_BLUE = (33, 33, 255)  # Blue for walls
 WHITE = (255, 255, 255)  # White for dots and text
-GHOST_RED = (180, 180, 180)  # Medium-light gray for ghost 1 (Blinky)
-GHOST_CYAN = (160, 160, 160)  # Medium gray for ghost 2 (Inky)
-GHOST_PINK = (140, 140, 140)  # Medium-dark gray for ghost 3 (Pinky)
-GHOST_ORANGE = (120, 120, 120)  # Gray for ghost 4 (Clyde)
-GHOST_PURPLE = (100, 100, 100)  # Dark gray for ghost 5
-GHOST_LIGHT = (200, 200, 200)  # Very light gray for ghost 6
-GHOST_MEDIUM = (150, 150, 150)  # Medium gray for ghost 7
-GHOST_DARK = (90, 90, 90)  # Very dark gray for ghost 8
-GHOST_GRAY1 = (170, 170, 170)  # Light-medium gray for ghost 9
-GHOST_GRAY2 = (130, 130, 130)  # Medium-dark gray for ghost 10
-VULNERABLE_BLUE = (80, 80, 80)  # Dark gray for vulnerable ghosts
-VULNERABLE_WHITE = (220, 220, 220)  # Light gray for flashing vulnerable ghosts
-POWER_PELLET_COLOR = (190, 190, 190)  # Light gray for power pellets
-TIMER_GREEN = (150, 150, 150)  # Medium gray for timer (high)
-TIMER_YELLOW = (130, 130, 130)  # Medium-dark gray for timer (medium)
-TIMER_RED = (110, 110, 110)  # Dark gray for timer (low)
-GAME_OVER_RED = (100, 100, 100)  # Dark gray for game over text
-WIN_GREEN = (170, 170, 170)  # Medium-light gray for win text
+GHOST_RED = (255, 0, 0)  # Red for ghost 1 (Blinky)
+GHOST_CYAN = (0, 255, 255)  # Cyan for ghost 2 (Inky)
+GHOST_PINK = (255, 184, 255)  # Pink for ghost 3 (Pinky)
+GHOST_ORANGE = (255, 165, 0)  # Orange for ghost 4 (Clyde)
+GHOST_PURPLE = (128, 0, 128)  # Purple for ghost 5
+GHOST_LIGHT = (173, 216, 230)  # Light blue for ghost 6
+GHOST_MEDIUM = (255, 20, 147)  # Deep pink for ghost 7
+GHOST_DARK = (75, 0, 130)  # Indigo for ghost 8
+GHOST_GRAY1 = (0, 255, 127)  # Spring green for ghost 9
+GHOST_GRAY2 = (255, 215, 0)  # Gold for ghost 10
+VULNERABLE_BLUE = (0, 0, 255)  # Blue for vulnerable ghosts
+VULNERABLE_WHITE = (255, 255, 255)  # White for flashing vulnerable ghosts
+POWER_PELLET_COLOR = (255, 255, 255)  # White for power pellets
+TIMER_GREEN = (0, 255, 0)  # Green for timer (high)
+TIMER_YELLOW = (255, 255, 0)  # Yellow for timer (medium)
+TIMER_RED = (255, 0, 0)  # Red for timer (low)
+GAME_OVER_RED = (255, 0, 0)  # Red for game over text
+WIN_GREEN = (0, 255, 0)  # Green for win text
 
 # Game settings
 PACMAN_SIZE = 20
