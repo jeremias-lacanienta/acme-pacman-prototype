@@ -25,6 +25,12 @@ GHOST_RED = (180, 180, 180)  # Medium-light gray for ghost 1 (Blinky)
 GHOST_CYAN = (160, 160, 160)  # Medium gray for ghost 2 (Inky)
 GHOST_PINK = (140, 140, 140)  # Medium-dark gray for ghost 3 (Pinky)
 GHOST_ORANGE = (120, 120, 120)  # Gray for ghost 4 (Clyde)
+GHOST_PURPLE = (100, 100, 100)  # Dark gray for ghost 5
+GHOST_LIGHT = (200, 200, 200)  # Very light gray for ghost 6
+GHOST_MEDIUM = (150, 150, 150)  # Medium gray for ghost 7
+GHOST_DARK = (90, 90, 90)  # Very dark gray for ghost 8
+GHOST_GRAY1 = (170, 170, 170)  # Light-medium gray for ghost 9
+GHOST_GRAY2 = (130, 130, 130)  # Medium-dark gray for ghost 10
 VULNERABLE_BLUE = (80, 80, 80)  # Dark gray for vulnerable ghosts
 VULNERABLE_WHITE = (220, 220, 220)  # Light gray for flashing vulnerable ghosts
 POWER_PELLET_COLOR = (190, 190, 190)  # Light gray for power pellets
@@ -251,19 +257,21 @@ class Game:
         # Initialize game objects
         self.pacman = Pacman(40, 40)
 
-        # Create 4 ghosts with varied colors and spawn positions
-        ghost_colors = [GHOST_RED, GHOST_CYAN, GHOST_PINK, GHOST_ORANGE]
+        # Create 5 ghosts with varied colors and spawn positions
+        ghost_colors = [GHOST_RED, GHOST_CYAN, GHOST_PINK, GHOST_ORANGE, GHOST_PURPLE,
+                       GHOST_LIGHT, GHOST_MEDIUM, GHOST_DARK, GHOST_GRAY1, GHOST_GRAY2]
         self.ghosts = []
 
-        # Ghost house center area
+        # Ghost house center area - spawn positions for 5 ghosts
         ghost_positions = [
-            (360, 240),
-            (400, 240),
-            (360, 280),
-            (400, 280)
+            (340, 220),
+            (380, 220),
+            (420, 220),
+            (460, 220),
+            (340, 260)
         ]
 
-        for i in range(4):
+        for i in range(5):
             color = ghost_colors[i]
             x, y = ghost_positions[i]
             self.ghosts.append(Ghost(x, y, color))
@@ -338,10 +346,11 @@ class Game:
                         self.pacman.x, self.pacman.y = 40, 40
                         # Reset ghosts to their spawn positions
                         ghost_positions = [
-                            (360, 240),
-                            (400, 240),
-                            (360, 280),
-                            (400, 280)
+                            (340, 220),
+                            (380, 220),
+                            (420, 220),
+                            (460, 220),
+                            (340, 260)
                         ]
                         for i, g in enumerate(self.ghosts):
                             g.x, g.y = ghost_positions[i]
